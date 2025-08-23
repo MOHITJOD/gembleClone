@@ -1,13 +1,13 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     
       <nav className="navbar navbar-expand-lg border-bottom">
         <div className="container ">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <img style={{width:"22%"}} src="assets/images/logo.svg" alt="logo"/>
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,61 +22,61 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link active m-2"
                   aria-current="page"
-                  href="/signup"
+                  to="/signup"
                 >
                   Signup
-                </a>
+                </Link>
               </li>
               <li className="nav-item m-2">
-                <a className="nav-link" href="/about">
+                <Link className="nav-link" to="/about">
                   About
-                </a>
+                </Link>
               </li>
               <li className="nav-item m-2">
-                <a className="nav-link" href="/products">
+                <Link className="nav-link" to="/products">
                   Products
-                </a>
+                </Link>
               </li>
               <li className="nav-item m-2">
-                <a className="nav-link" href="/price">
+                <Link className="nav-link" to="/price">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li className="nav-item m-2">
-                <a className="nav-link" href="/support">
+                <Link className="nav-link" to="/support">
                   Support
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown m-2">
-                <a
+                <Link
                   className="nav-link "
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   <i class="fa-solid fa-bars"></i>
-                </a>
+                </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Something else here
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
