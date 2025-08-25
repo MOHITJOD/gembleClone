@@ -9,7 +9,7 @@ function NoPage() {
   }
 
   return (
-    <div className='container'>
+    <div className='container mt-5'>
       <div className='row text-center'>
         <h3 className='mt-5'>error code - 404</h3>
         <p className=''>Page not found.</p>
