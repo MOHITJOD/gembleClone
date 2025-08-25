@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="container">
+    <div className="container" style={{marginTop:"10rem"}}>
       <div className="row m-5 text-center">
         <h3>
           We pioneered the discount broking model in India.
