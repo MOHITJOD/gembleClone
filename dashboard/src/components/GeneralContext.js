@@ -1,24 +1,45 @@
 import React, { useState } from "react";
-
 import BuyActionWindow from "./BuyActionWindow";
+import SellActionWindow from "./SellActionWindow";
 
 const GeneralContext = React.createContext({
-  openBuyWindow: (uid) => {},
+  openBuyWindow: (uid, price) => {},
   closeBuyWindow: () => {},
+  openSellWindow: (uid, price, availableQty) => {},
+  closeSellWindow: () => {},
 });
 
 export const GeneralContextProvider = (props) => {
   const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);
+  const [isSellWindowOpen, setIsSellWindowOpen] = useState(false);
   const [selectedStockUID, setSelectedStockUID] = useState("");
+  const [selectedStockPrice, setSelectedStockPrice] = useState(0);
+  const [selectedStockQty, setSelectedStockQty] = useState(0);
 
-  const handleOpenBuyWindow = (uid) => {
+  const handleOpenBuyWindow = (uid, price) => {
     setIsBuyWindowOpen(true);
     setSelectedStockUID(uid);
+    setSelectedStockPrice(price);
   };
 
   const handleCloseBuyWindow = () => {
     setIsBuyWindowOpen(false);
     setSelectedStockUID("");
+    setSelectedStockPrice(0);
+  };
+
+  const handleOpenSellWindow = (uid, price, availableQty) => {
+    setIsSellWindowOpen(true);
+    setSelectedStockUID(uid);
+    setSelectedStockPrice(price);
+    setSelectedStockQty(availableQty);
+  };
+
+  const handleCloseSellWindow = () => {
+    setIsSellWindowOpen(false);
+    setSelectedStockUID("");
+    setSelectedStockPrice(0);
+    setSelectedStockQty(0);
   };
 
   return (
@@ -26,10 +47,13 @@ export const GeneralContextProvider = (props) => {
       value={{
         openBuyWindow: handleOpenBuyWindow,
         closeBuyWindow: handleCloseBuyWindow,
+        openSellWindow: handleOpenSellWindow,
+        closeSellWindow: handleCloseSellWindow,
       }}
     >
       {props.children}
-      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}
+      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} price={selectedStockPrice} />}
+      {isSellWindowOpen && <SellActionWindow uid={selectedStockUID} price={selectedStockPrice} availableQty={selectedStockQty} />}
     </GeneralContext.Provider>
   );
 };

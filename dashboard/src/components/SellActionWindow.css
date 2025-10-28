@@ -1,0 +1,95 @@
+.sell-window-container#sell-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 1000;
+}
+
+#sell-window .regular-order {
+  margin-bottom: 20px;
+}
+
+#sell-window .inputs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+#sell-window .inputs fieldset {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#sell-window .inputs legend {
+  font-size: 12px;
+  color: #666;
+  padding: 0 5px;
+}
+
+#sell-window .inputs input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px 0;
+}
+
+#sell-window .available-qty {
+  font-size: 13px;
+  color: #666;
+  margin-top: 5px;
+}
+
+#sell-window .buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#sell-window .buttons span {
+  font-size: 14px;
+  color: #666;
+}
+
+#sell-window .buttons div {
+  display: flex;
+  gap: 10px;
+}
+
+#sell-window .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+#sell-window .btn-red {
+  background-color: #eb5b3c;
+  color: white;
+}
+
+#sell-window .btn-red:hover {
+  background-color: #d14a2e;
+}
+
+#sell-window .btn-grey {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#sell-window .btn-grey:hover {
+  background-color: #d0d0d0;
+}

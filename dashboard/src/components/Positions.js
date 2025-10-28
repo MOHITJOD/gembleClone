@@ -1,11 +1,20 @@
-import { positions } from "../data/data";
-// import React from "react";
+// import { positions } from "../data/data";
+ import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Positions = () => {
+  const [allPositions, setAllPositions] = useState([]);
+useEffect( ()=>{
+  axios.get("http://localhost:3002/allPositions").then((res)=>{
+    setAllPositions(res.data);
+    console.log("Positions data loaded:", res.data);
+  }).catch((error) => {
+    console.error("Error loading positions:", error);
+  })
+}, []);
   return (
     <>
-      <h3 className="title">Positions ({positions.length})</h3>
-
+      <h3 className="title">Positions ({allPositions.length})</h3>
       <div className="order-table">
         <table>
           <tr>
@@ -18,17 +27,15 @@ const Positions = () => {
             <th>Chg.</th>
           </tr>
 
-
           {
-                positions.map((stock, index )=>{
+                allPositions.map((stock, index )=>{
                   const curValue = stock.price*stock.qty;
                   const isProfit = curValue - stock.avg * stock.qty >= 0.0;
                   const profitClass = isProfit ? "profit" : "loss";
                   const dayChange =  stock.isLoss ? "loss" : "profit";
           
-          
-                  return(
-                     <tr key={index} >
+                  return( 
+                    <tr key={index} >
                       <td>{stock.product}</td>
                       <td>{stock.name}</td>
                       <td>{stock.qty}</td>
@@ -39,10 +46,10 @@ const Positions = () => {
                       {/* <td className={profitClass}>{stock.net}</td> */}
                       <td className={dayChange}>{stock.day}</td>
                     </tr>
-                  )
+                  ) 
                 }
               )
-              }
+            }
 
         </table>
       </div>

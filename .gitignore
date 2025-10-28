@@ -1,0 +1,61 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+build/
+dist/
+.out/
+.next/
+.nuxt/
+.svelte-kit/
+coverage/
+.tmp/
+.temp/
+.cache/
+**/.cache/
+**/.parcel-cache/
+**/.vite/
+**/.turbo/
+
+# CRA and bundler artifacts
+frontend/build/
+dashboard/build/
+backend/build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files (DO NOT COMMIT SECRETS)
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swm
+.idea/
+.vscode/
+*.iml
+
+# Local tooling
+.vercel/
+.netlify/
+firebase-debug.log
+
+# Misc
+*.local
+*.cache
+
+# Lockfiles (kept)
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml

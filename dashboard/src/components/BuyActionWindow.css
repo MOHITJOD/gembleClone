@@ -1,4 +1,4 @@
-.container {
+.buy-window-container#buy-window {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -12,30 +12,30 @@
   z-index: 1000;
 }
 
-.regular-order {
+#buy-window .regular-order {
   margin-bottom: 20px;
 }
 
-.inputs {
+#buy-window .inputs {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
 }
 
-.inputs fieldset {
+#buy-window .inputs fieldset {
   flex: 1;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
 }
 
-.inputs legend {
+#buy-window .inputs legend {
   font-size: 12px;
   color: #666;
   padding: 0 5px;
 }
 
-.inputs input {
+#buy-window .inputs input {
   width: 100%;
   border: none;
   outline: none;
@@ -43,24 +43,24 @@
   padding: 5px 0;
 }
 
-.buttons {
+#buy-window .buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
 }
 
-.buttons span {
+#buy-window .buttons span {
   font-size: 14px;
   color: #666;
 }
 
-.buttons div {
+#buy-window .buttons div {
   display: flex;
   gap: 10px;
 }
 
-.btn {
+#buy-window .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -70,20 +70,20 @@
   transition: all 0.2s ease;
 }
 
-.btn-blue {
+#buy-window .btn-blue {
   background-color: #387ed1;
   color: white;
 }
 
-.btn-blue:hover {
+#buy-window .btn-blue:hover {
   background-color: #2e6bb5;
 }
 
-.btn-grey {
+#buy-window .btn-grey {
   background-color: #e0e0e0;
   color: #333;
 }
 
-.btn-grey:hover {
+#buy-window .btn-grey:hover {
   background-color: #d0d0d0;
 }

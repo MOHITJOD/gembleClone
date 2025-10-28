@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Menu = () => {
+  const navigate = useNavigate();
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -12,6 +13,16 @@ const Menu = () => {
 
   const handleProfileClick = (index) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Clear the cookie by making a request or just navigate
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   const menuClass = "menu";
@@ -94,6 +105,13 @@ const Menu = () => {
           <div className="avatar">MG</div>
           <p className="username">mohitfpp</p>
         </div>
+        {isProfileDropdownOpen && (
+          <div className="profile-dropdown">
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

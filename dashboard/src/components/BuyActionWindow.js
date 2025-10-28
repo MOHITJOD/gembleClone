@@ -1,15 +1,20 @@
 import React, { useState, useContext } from "react";
 import GeneralContext from "./GeneralContext";
-// import "./BuyActionWindow.css";
+import "./BuyActionWindow.css";
+import axios from "axios";
 
-const BuyActionWindow = ({ uid }) => {
+const BuyActionWindow = ({ uid, price }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
-  const [stockPrice, setStockPrice] = useState(0.0);
+  const stockPrice = price || 0;
   const generalContext = useContext(GeneralContext);
 
   const handleBuyClick = () => {
-    // TODO: Implement actual buy logic here
-    console.log("Buying", stockQuantity, "shares of", uid, "at", stockPrice);
+    axios.post("http://localhost:3002/newOrder", {
+      name: uid,
+      qty: stockQuantity,
+      price: stockPrice,
+      mode: "buy",
+    });
     generalContext.closeBuyWindow();
   };
 
@@ -18,7 +23,7 @@ const BuyActionWindow = ({ uid }) => {
   };
 
   return (
-    <div className="container" id="buy-window" draggable="true">
+    <div className="buy-window-container" id="buy-window" draggable="true">
       <div className="regular-order">
         <div className="inputs">
           <fieldset>
@@ -27,7 +32,7 @@ const BuyActionWindow = ({ uid }) => {
               type="number"
               name="qty"
               id="qty"
-              onChange={(e) => setStockQuantity(Number(e.target.value))}
+              onChange={(e) => setStockQuantity((e.target.value))}
               value={stockQuantity}
               min="1"
             />
@@ -38,16 +43,15 @@ const BuyActionWindow = ({ uid }) => {
               type="number"
               name="price"
               id="price"
-              step="0.05"
-              onChange={(e) => setStockPrice(Number(e.target.value))}
               value={stockPrice}
+              readOnly
             />
           </fieldset>
         </div>
       </div>
 
       <div className="buttons">
-        <span>Margin required ₹140.65</span>
+        <span>Margin required ₹{(stockPrice * stockQuantity).toFixed(2)}</span>
         <div>
           <button className="btn btn-blue" onClick={handleBuyClick}>
             Buy
