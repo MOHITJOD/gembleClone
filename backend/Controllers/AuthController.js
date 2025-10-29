@@ -2,6 +2,16 @@ const User = require("../model/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
+const buildCookieOptions = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+  return {
+    httpOnly: false,
+    sameSite: isProduction ? "None" : "Lax",
+    secure: isProduction,
+    maxAge: 24 * 60 * 60 * 1000,
+  };
+};
+
 module.exports.Signup = async (req, res, next) => {
   try {
     const { email, password, username, createdAt } = req.body;
@@ -11,10 +21,7 @@ module.exports.Signup = async (req, res, next) => {
     }
     const user = await User.create({ email, password, username, createdAt });
     const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-    });
+    res.cookie("token", token, buildCookieOptions());
     res
       .status(201)
       .json({ message: "User signed in successfully", success: true, user });
@@ -39,10 +46,7 @@ module.exports.Login = async (req, res, next) => {
       return res.json({ message: "Incorrect password or email" });
     }
     const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-    });
+    res.cookie("token", token, buildCookieOptions());
     res
       .status(201)
       .json({ message: "User logged in successfully", success: true, username: user.username });
