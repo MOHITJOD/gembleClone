@@ -1,5 +1,14 @@
 import React from "react";
 
+const LinkButton = ({ children }) => (
+  <button
+    type="button"
+    className="btn btn-link text-decoration-none p-0 w-100 text-start"
+  >
+    {children}
+  </button>
+);
+
 function CreateTicket() {
   return (
     <div className="mt-5">
@@ -27,31 +36,31 @@ function CreateTicket() {
                 <div className="accordion-body">
                   <ul className="p-4 ">
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Resident individual</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Minor</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Non Resident Indian (NRI)</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">
                           Company, Partnership, HUF and LLP Glossary
                         </h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Glossary</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                   </ul>
                 </div>
@@ -67,7 +76,7 @@ function CreateTicket() {
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseTwo"
                 >
-                  <i class="fa-solid fa-user m-3"></i>
+                  <i className="fa-solid fa-user m-3"></i>
                   <h5>Your Zerodha Account</h5>
                 </button>
               </h2>
@@ -78,31 +87,31 @@ function CreateTicket() {
                 <div className="accordion-body">
                   <ul className="p-4 ">
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Resident individual</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Minor</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Non Resident Indian (NRI)</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">
                           Company, Partnership, HUF and LLP Glossary
                         </h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Glossary</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                   </ul>
                 </div>
@@ -118,7 +127,7 @@ function CreateTicket() {
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseThree"
                 >
-                  <i class="fa-solid fa-indian-rupee-sign m-3"></i>
+                  <i className="fa-solid fa-indian-rupee-sign m-3"></i>
                   <h5>Funds</h5>
                 </button>
               </h2>
@@ -129,31 +138,31 @@ function CreateTicket() {
                 <div className="accordion-body">
                   <ul className="p-4 ">
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Resident individual</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Minor</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Non Resident Indian (NRI)</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">
                           Company, Partnership, HUF and LLP Glossary
                         </h6>
-                      </a>
+                      </LinkButton>
                     </li>
                     <li>
-                      <a href="" className="text-decoration-none">
+                      <LinkButton>
                         <h6 className="m-3">Glossary</h6>
-                      </a>
+                      </LinkButton>
                     </li>
                   </ul>
                 </div>
@@ -165,32 +174,34 @@ function CreateTicket() {
           <div className="ms-1 bg-warning">
             <ul>
               <li className="p-2">
-                <a href="">
+                <LinkButton>
                   Exclusion of F&O contracts on 8 securities from August 29,
                   2025
-                </a>
+                </LinkButton>
               </li>
               <li className="p-2">
-                <a href="">
+                <LinkButton>
                   Revision in expiry day of Index and Stock derivatives
                   contracts
-                </a>
+                </LinkButton>
               </li>
             </ul>
           </div>
           <div className="bg-light mt-3 p-3">
             <h5>Quick Links</h5>
             <ol>
-              <a href="" className="text-decoration-none fs-5">
-                <li>Track account opening</li>
-              </a>
-              <a href="" className="text-decoration-none fs-5">
-              <li>Track segment activation</li></a>
-              <a href="" className="text-decoration-none fs-5">
-              <li>Intraday margins</li></a>
-              <a href="" className="text-decoration-none fs-5">
-              <li>Kite user manual</li>
-              </a>
+              <li>
+                <LinkButton>Track account opening</LinkButton>
+              </li>
+              <li>
+                <LinkButton>Track segment activation</LinkButton>
+              </li>
+              <li>
+                <LinkButton>Intraday margins</LinkButton>
+              </li>
+              <li>
+                <LinkButton>Kite user manual</LinkButton>
+              </li>
             </ol>
           </div>
         </div>
