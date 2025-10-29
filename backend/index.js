@@ -59,17 +59,85 @@ app.get('/checkHolding/:stockName', async (req, res)=>{
 
 app.post('/newOrder', async (req, res)=>{
     try {
+        const { name, qty, price, mode } = req.body;
+        
+        // Convert to numbers to ensure proper calculation
+        const orderQty = Number(qty);
+        const orderPrice = Number(price);
+        
+        // Save the order
         let newOrder = new orderModel({
-            name: req.body.name,
-            qty: req.body.qty,
-            price: req.body.price,
-            mode: req.body.mode,
+            name: name,
+            qty: orderQty,
+            price: orderPrice,
+            mode: mode,
         });
         await newOrder.save();
-        res.send("Order placed successfully!");
+
+        // Update holdings based on order type
+        const existingHolding = await holdingModel.findOne({ name: name });
+
+        if (mode === "buy") {
+            if (existingHolding) {
+                // Update existing holding - calculate new average price
+                const totalQty = existingHolding.qty + orderQty;
+                const totalCost = (existingHolding.avg * existingHolding.qty) + (orderPrice * orderQty);
+                const newAvg = totalCost / totalQty;
+
+                await holdingModel.updateOne(
+                    { name: name },
+                    { 
+                        qty: totalQty,
+                        avg: newAvg,
+                        price: orderPrice
+                    }
+                );
+            } else {
+                // Create new holding
+                let newHolding = new holdingModel({
+                    name: name,
+                    qty: orderQty,
+                    avg: orderPrice,
+                    price: orderPrice,
+                    net: "+0.00%",
+                    day: "+0.00%",
+                });
+                await newHolding.save();
+            }
+        } else if (mode === "sell") {
+            if (existingHolding) {
+                const newQty = existingHolding.qty - orderQty;
+                
+                if (newQty > 0) {
+                    // Update quantity
+                    await holdingModel.updateOne(
+                        { name: name },
+                        { 
+                            qty: newQty,
+                            price: orderPrice
+                        }
+                    );
+                } else if (newQty === 0) {
+                    // Remove holding if all shares are sold
+                    await holdingModel.deleteOne({ name: name });
+                } else {
+                    return res.status(400).json({ 
+                        success: false, 
+                        message: "Cannot sell more shares than you own" 
+                    });
+                }
+            } else {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: "You don't own this stock" 
+                });
+            }
+        }
+
+        res.json({ success: true, message: "Order placed and holdings updated successfully!" });
     } catch (error) {
         console.error("Error saving order:", error);
-        res.status(500).send("Error placing order: " + error.message);
+        res.status(500).json({ success: false, message: "Error placing order: " + error.message });
     }
 });
 

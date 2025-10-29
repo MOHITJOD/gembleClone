@@ -1,10 +1,13 @@
 import React from "react";
+import { useUser } from "../context/UserContext";
 
 const Summary = () => {
+  const { username } = useUser();
+  
   return (
     <>
       <div className="username">
-        <h6>Hi, Mohit!</h6>
+        <h6>Hi, {username || "User"}!</h6>
         <hr className="divider" />
       </div>
 

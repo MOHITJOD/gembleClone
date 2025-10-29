@@ -843,34 +843,49 @@ hr {
 }
 
 /* Profile dropdown and logout button */
+.profile {
+  position: relative;
+}
+
 .profile-dropdown {
   position: absolute;
-  bottom: 60px;
-  left: 10px;
+  top: 45px;
+  right: 0;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 8px;
   z-index: 1000;
+  min-width: 120px;
+  animation: dropdownFadeIn 0.2s ease-in-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .logout-btn {
   background-color: #eb5b3c;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.85rem;
+  font-weight: 400;
   width: 100%;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .logout-btn:hover {
   background-color: #d14a2e;
-}
-
-.profile {
-  position: relative;
 }

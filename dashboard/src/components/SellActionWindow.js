@@ -8,19 +8,32 @@ const SellActionWindow = ({ uid, price, availableQty }) => {
   const stockPrice = price || 0;
   const generalContext = useContext(GeneralContext);
 
-  const handleSellClick = () => {
+  const handleSellClick = async () => {
     if (stockQuantity > availableQty) {
       alert(`You only have ${availableQty} shares available to sell.`);
       return;
     }
 
-    axios.post("http://localhost:3002/newOrder", {
-      name: uid,
-      qty: stockQuantity,
-      price: stockPrice,
-      mode: "sell",
-    });
-    generalContext.closeSellWindow();
+    try {
+      const response = await axios.post("http://localhost:3002/newOrder", {
+        name: uid,
+        qty: stockQuantity,
+        price: stockPrice,
+        mode: "sell",
+      });
+      
+      if (response.data.success) {
+        alert(response.data.message || "Order placed successfully!");
+        generalContext.closeSellWindow();
+        // Reload the page to reflect updated holdings
+        window.location.reload();
+      } else {
+        alert(response.data.message || "Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Error placing order. Please try again.");
+    }
   };
 
   const handleCancelClick = () => {

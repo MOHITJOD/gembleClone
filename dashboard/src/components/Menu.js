@@ -1,19 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useUser } from "../context/UserContext";
 
 const Menu = () => {
   const navigate = useNavigate();
+  const { username } = useUser();
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
   };
 
-  const handleProfileClick = (index) => {
+  const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
+
+  // Get user initials for avatar
+  const getInitials = (name) => {
+    if (!name) return "U";
+    const names = name.trim().split(" ");
+    if (names.length >= 2) {
+      return (names[0][0] + names[names.length - 1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    if (isProfileDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileDropdownOpen]);
 
   const handleLogout = async () => {
     try {
@@ -101,17 +131,17 @@ const Menu = () => {
           </li> */}
         </ul>
         <hr />
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">MG</div>
-          <p className="username">mohitfpp</p>
+        <div className="profile" onClick={handleProfileClick} ref={dropdownRef}>
+          <div className="avatar">{getInitials(username)}</div>
+          <p className="username">{username || "User"}</p>
+          {isProfileDropdownOpen && (
+            <div className="profile-dropdown">
+              <button onClick={handleLogout} className="logout-btn">
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-        {isProfileDropdownOpen && (
-          <div className="profile-dropdown">
-            <button onClick={handleLogout} className="logout-btn">
-              Logout
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

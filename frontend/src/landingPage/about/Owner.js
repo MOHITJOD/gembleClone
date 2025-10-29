@@ -6,7 +6,7 @@ function Owner() {
       <div className="row">
         <h3 className="text-center mb-5">People</h3>
         <div className="col text-center">
-          <img src="assets/images/mohit3.jpg" alt="owner" style={{width:"50%"}} className="mb-4 rounded"></img>
+          <img src="assets/images/mohit1.jpg" alt="owner" style={{width:"50%"}} className="mb-4 rounded"></img>
         <h5 className="text-center">Mohit Giri</h5>
         <h6 className="text-secondary">Founder, CEO</h6>
         </div>
