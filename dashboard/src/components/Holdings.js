@@ -2,6 +2,7 @@ import React , {useEffect, useState}from "react";
 // import { holdings } from "../data/data";
 import axios from "axios";
 import { VerticalGraph } from "./verticalGraph";
+import { API_BASE_URL } from "../config";
 
 const Holdings = () => {
 
@@ -19,7 +20,7 @@ const data = {
   ]
 };
 useEffect( ()=>{
-  axios.get("http://localhost:3002/allHoldings").then((res)=>{
+  axios.get(`${API_BASE_URL}/allHoldings`).then((res)=>{
     setAllHoldings(res.data);
     console.log("Holdings data loaded:", res.data);
   }).catch((error) => {

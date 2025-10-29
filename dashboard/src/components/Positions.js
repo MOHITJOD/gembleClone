@@ -1,11 +1,12 @@
 // import { positions } from "../data/data";
  import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
 useEffect( ()=>{
-  axios.get("http://localhost:3002/allPositions").then((res)=>{
+  axios.get(`${API_BASE_URL}/allPositions`).then((res)=>{
     setAllPositions(res.data);
     console.log("Positions data loaded:", res.data);
   }).catch((error) => {

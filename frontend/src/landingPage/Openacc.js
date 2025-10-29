@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Openacc() {
   return (
@@ -9,12 +10,13 @@ function Openacc() {
           Modern platforms and apps, ₹0 investments, and flat ₹20 intraday and
           F&O trades.
         </p>
-        <button
+        <Link
+          to='/signup'
           className="btn btn-primary p-2 fs-5 fw-semibold"
           style={{ width: "15rem", margin: "0 auto" }}
         >
           Sign up for free
-        </button>
+        </Link>
       </div>
     </div>
   );

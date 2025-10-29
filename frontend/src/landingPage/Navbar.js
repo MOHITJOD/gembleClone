@@ -22,13 +22,13 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item m-2">
-                <a
+                <Link
                   className="nav-link"
                   aria-current="page"
-                  href={`${process.env.REACT_APP_DASHBOARD_URL || 'http://localhost:3000'}/signup`}
+                  to="/signup"
                 >
                   Signup
-                </a>
+                </Link>
               </li>
               <li className="nav-item m-2">
                 <Link className="nav-link" to="/about">

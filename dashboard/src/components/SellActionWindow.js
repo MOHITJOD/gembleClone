@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import GeneralContext from "./GeneralContext";
 import "./SellActionWindow.css";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const SellActionWindow = ({ uid, price, availableQty }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
@@ -15,7 +16,7 @@ const SellActionWindow = ({ uid, price, availableQty }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3002/newOrder", {
+      const response = await axios.post(`${API_BASE_URL}/newOrder`, {
         name: uid,
         qty: stockQuantity,
         price: stockPrice,

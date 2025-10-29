@@ -5,6 +5,7 @@ import {BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz} from "@
 import GeneralContext from "./GeneralContext";
 import axios from "axios";
 import { DhoklaGraph } from "./dhoklaGraph";
+import { API_BASE_URL } from "../config";
 
 
 const labels = watchlist.map((stock)=>stock.name);
@@ -98,7 +99,7 @@ const WatchListActions = ({uid, price}) => {
 
   const handleSellClick = async () => {
     try {
-      const response = await axios.get(`http://localhost:3002/checkHolding/${uid}`);
+      const response = await axios.get(`${API_BASE_URL}/checkHolding/${uid}`);
       
       if (response.data.exists && response.data.qty > 0) {
         generalContext.openSellWindow(uid, price, response.data.qty);

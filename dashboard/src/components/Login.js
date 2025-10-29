@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
+import { API_BASE_URL } from "../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Login = () => {
     
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/auth/login",
+        `${API_BASE_URL}/auth/login`,
         {
           ...inputValue,
         },
@@ -57,10 +58,15 @@ const Login = () => {
     });
   };
 
+  const handleLogoClick = () => {
+    const frontendUrl = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:3001';
+    window.location.href = frontendUrl;
+  };
+
   return (
     <div className="auth-page">
       <div className="form_container">
-        <div className="auth-logo">
+        <div className="auth-logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <img src="/logo.png" alt="Logo" />
         </div>
         <h2>Welcome Back</h2>

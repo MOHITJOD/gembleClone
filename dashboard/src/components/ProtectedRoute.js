@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
+import { API_BASE_URL } from "../config";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
     const verifyCookie = async () => {
       try {
         const { data } = await axios.post(
-          "http://localhost:3002/auth/",
+          `${API_BASE_URL}/auth/`,
           {},
           { withCredentials: true }
         );
