@@ -11,12 +11,14 @@ const ProtectedRoute = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const verifyCookie = async () => {
+    const verifyAuth = async () => {
       try {
+        const token = localStorage.getItem("token");
+        const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
         const { data } = await axios.post(
           `${API_BASE_URL}/auth/`,
           {},
-          { withCredentials: true }
+          config
         );
         
         const { status, user } = data;
@@ -35,7 +37,7 @@ const ProtectedRoute = ({ children }) => {
       }
     };
     
-    verifyCookie();
+    verifyAuth();
   }, [navigate, setUsername]);
 
   if (isLoading) {

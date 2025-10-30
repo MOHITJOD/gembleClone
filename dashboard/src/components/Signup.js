@@ -34,12 +34,12 @@ const Signup = () => {
         `${API_BASE_URL}/auth/signup`,
         {
           ...inputValue,
-        },
-        { withCredentials: true }
+        }
       );
       
-      const { success, message } = data;
-      if (success) {
+      const { success, message, token } = data;
+      if (success && token) {
+        localStorage.setItem("token", token);
         setSuccess(message);
         setTimeout(() => {
           navigate("/");
